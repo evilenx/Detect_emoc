@@ -1,0 +1,10 @@
+opencv-python
+mediapipe
+fer
+onnxruntime
+sounddevice
+librosa
+streamlit
+pandas
+numpy
+
