@@ -1,4 +1,4 @@
-from fer import FER
+from fer.fer import FER
 import cv2
 
 detector = FER(mtcnn=False)
