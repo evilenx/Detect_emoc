@@ -35,3 +35,4 @@ def actualizar_usuario(nombre, emocion_video, emocion_audio):
 
     with open(ruta, "a") as f:
         f.write(linea)
+

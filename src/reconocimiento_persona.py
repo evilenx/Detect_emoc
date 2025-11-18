@@ -6,7 +6,7 @@ CARPETA_FACES = "data_faces"
 CARPETA_MODELOS = "models"
 MODELO_RUTA = os.path.join(CARPETA_MODELOS, "lbph_model.xml")
 
-# Detecttor de rostros
+# Detector de rostros
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 def asegurar_carpetas():
@@ -14,7 +14,6 @@ def asegurar_carpetas():
         os.makedirs(CARPETA_FACES)
     if not os.path.exists(CARPETA_MODELOS):
         os.makedirs(CARPETA_MODELOS)
-
 
 def recolectar_rostro(frame, nombre):
     asegurar_carpetas()
@@ -32,10 +31,12 @@ def recolectar_rostro(frame, nombre):
         idx = len(os.listdir(carpeta_usuario)) + 1
         ruta_foto = os.path.join(carpeta_usuario, f"{idx}.jpg")
         cv2.imwrite(ruta_foto, rostro)
+
+    # Retornar True solo si se encontraron rostros
+    if len(rostros) > 0:
         return True
-
+    
     return False
-
 
 def entrenar_lbph():
     asegurar_carpetas()
@@ -68,7 +69,6 @@ def entrenar_lbph():
 
     return model, label_map
 
-
 def cargar_modelo():
     if os.path.exists(MODELO_RUTA):
         model = cv2.face.LBPHFaceRecognizer_create()
@@ -83,7 +83,6 @@ def cargar_modelo():
 
     return None, None
 
-
 def reconocer(frame, model, label_map):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     rostros = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -97,5 +96,4 @@ def reconocer(frame, model, label_map):
             return nombre, 1.0 - confianza / 100.0
 
     return None, 0.0
-
 

@@ -26,6 +26,7 @@ CARPETA_REGISTROS = "registros_usuarios"
 # ---------------------------------------------------
 # Utilidades
 # ---------------------------------------------------
+
 def guardar_csv(nombre, emo_v, conf_v, emo_a, conf_a, fps=0):
     with open("registro_emociones.csv", "a", newline="") as f:
         writer = csv.writer(f)
@@ -39,19 +40,16 @@ def guardar_csv(nombre, emo_v, conf_v, emo_a, conf_a, fps=0):
             fps
         ])
 
-
 def asegurar_carpetas():
     if not os.path.exists(CARPETA_FACES):
         os.makedirs(CARPETA_FACES)
     if not os.path.exists(CARPETA_REGISTROS):
         os.makedirs(CARPETA_REGISTROS)
 
-
 asegurar_carpetas()
 
 st.set_page_config(page_title="Detector Multimodal", layout="wide")
 st.title("Detector Multimodal de Emociones con Reconocimiento Facial")
-
 
 # Sidebar: modo de trabajo
 modo = st.sidebar.radio(
@@ -78,7 +76,7 @@ if modo == "Registrar usuario":
         else:
             # Convertir imagen de Streamlit a frame (BGR para OpenCV)
             img = Image.open(foto)
-            img_np = np.array(img)          # RGB
+            img_np = np.array(img)  # RGB
             frame = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
 
             # Recolectar rostro (guarda en data_faces/nombre/)
@@ -118,49 +116,50 @@ elif modo == "Reconocer & analizar emociones":
             else:
                 st.warning("Para detener, cierra la pestaña o detén Streamlit en la terminal (Ctrl+C).")
 
-                ultimo_audio = time.time()
-                emo_audio_actual = "Analizando..."
-                conf_audio_actual = 0.0
+            ultimo_audio = time.time()
+            emo_audio_actual = "Analizando..."
+            conf_audio_actual = 0.0
 
-                while True:
-                    ret, frame = cap.read()
-                    if not ret:
-                        st.error("No se pudo leer frame de la cámara.")
-                        break
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    st.error("No se pudo leer frame de la cámara.")
+                    break
 
-                    # Reconocimiento facial
-                    nombre, conf_id = reconocer(frame, model, label_map)
-                    if nombre is None:
-                        nombre = "desconocido"
+                # Reconocimiento facial
+                nombre, conf_id = reconocer(frame, model, label_map)
+                if nombre is None:
+                    nombre = "desconocido"
 
-                    # Emociones por video
-                    emo_v, conf_v = emocion_por_video(frame)
+                # Emociones por video
+                emo_v, conf_v = emocion_por_video(frame)
 
-                    # Emociones por audio cada 2s
-                    if time.time() - ultimo_audio > 2:
-                        audio = grabar_audio()
-                        emo_audio_actual, conf_audio_actual = emocion_por_audio(audio)
-                        ultimo_audio = time.time()
+                # Emociones por audio cada 2s
+                if time.time() - ultimo_audio > 2:
+                    audio = grabar_audio()
+                    emo_audio_actual, conf_audio_actual = emocion_por_audio(audio)
+                    ultimo_audio = time.time()
 
-                    # Actualizar registros solo si NO es desconocido
-                    if nombre != "desconocido":
-                        actualizar_usuario(nombre, emo_v, emo_audio_actual)
-                        # Si usas estadísticas:
-                        # actualizar_estadisticas(nombre, emo_v, emo_audio_actual)
-                        guardar_csv(nombre, emo_v, conf_v, emo_audio_actual, conf_audio_actual, fps=0)
+                # Actualizar registros solo si NO es desconocido
+                if nombre != "desconocido":
+                    actualizar_usuario(nombre, emo_v, emo_audio_actual)
+                    # Si usas estadísticas:
+                    # actualizar_estadisticas(nombre, emo_v, emo_audio_actual)
+                    guardar_csv(nombre, emo_v, conf_v, emo_audio_actual, conf_audio_actual, fps=0)
 
-                    # Mostrar info en pantalla
-                    info_placeholder.markdown(
-                        f"""
-                        **Usuario:** `{nombre}` |  
-                        **Video:** {emo_v} ({conf_v:.2f})  
-                        **Audio:** {emo_audio_actual} ({conf_audio_actual:.2f})  
-                        """
-                    )
+                # Mostrar info en pantalla
+                info_placeholder.markdown(
+                    f"""
+                    **Usuario:** `{nombre}` |  
+                    **Video:** {emo_v} ({conf_v:.2f})  
+                    **Audio:** {emo_audio_actual} ({conf_audio_actual:.2f})  
+                    """
+                )
 
-                    # Mostrar frame en Streamlit
-                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                    img = Image.fromarray(frame_rgb)
-                    video_placeholder.image(img, use_column_width=True)
+                # Mostrar frame en Streamlit
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                img = Image.fromarray(frame_rgb)
+                video_placeholder.image(img, use_column_width=True)
 
-        cap.release()
+            cap.release()
+
