@@ -1,0 +1,65 @@
+# HumanFeel AI 
+<div align="center">
+  <img src="assets/image/humanfeelai.jpeg" alt="humanfeelai" />
+
+  <br/>
+
+![Python3](https://img.shields.io/badge/python3-%23000000.svg?style=for-the-badge&logo=python&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/github/v/release/evilenx/Detect_emoc?style=for-the-badge&color=000000)](https://github.com/evilenx/Detect_emoc/releases)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/evilenx/Detect_emoc/python.yml?style=for-the-badge&color=000000)](https://github.com/evilenx/Detect_emoc/actions)
+
+
+</div>
+
+## Description
+  **HumanFeelAI** is a real-time multimodal emotion detection system that combines computer vision and audio analysis to identify and track human emotions. The system uses facial recognition (LBPH), video-based emotion detection (FER), and audio emotion analysis to provide comprehensive emotional insights.
+
+## Features
+  - High-precision time display with nanoseconds
+  - Built in Rust for performance and reliability
+  - Simple command-line interface
+
+## Requirements
+
+	- Python: 3.8 or higher
+	- Webcam: For video capture
+	- Microphone: For audio emotion analysis
+	- OS: Linux, macOS, or Windows
+
+## Installation
+
+  ```
+	git clone https://github.com/evilenx/Detect_emoc.git
+	cd Detect_emoc
+	```
+
+  2. **Create virtual environment (recommended)**
+  ```bash
+	python3 -m venv venv
+	source venv/bin/activate
+  ```
+
+  3. **Install dependences:**
+  ```bash
+	pip install -r requirements.txt
+  ```
+
+  4. **Run the application**
+  ```bash
+	streamlit run src/app_streamlit.py
+  ```
+
+## Contributing
+  Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+  This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+**Author**  
+Gabriella Herrera  
+
+**GitHub:** [@evilenx](https://github.com/evilenx)  
+
+**Repository:** Detect_emoc
+
