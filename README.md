@@ -1,6 +1,6 @@
 # HumanFeel AI 
 <div align="center">
-  <img src="assets/image/humanfeelai.jpeg" alt="humanfeelai" />
+  <img src="assets/image/humanfeelai.jpeg" alt="humanfeelai" width="260"/>
 
   <br/>
 
@@ -16,9 +16,14 @@
   **HumanFeelAI** is a real-time multimodal emotion detection system that combines computer vision and audio analysis to identify and track human emotions. The system uses facial recognition (LBPH), video-based emotion detection (FER), and audio emotion analysis to provide comprehensive emotional insights.
 
 ## Features
-  - High-precision time display with nanoseconds
-  - Built in Rust for performance and reliability
-  - Simple command-line interface
+
+  - Multimodal detection via video and audio
+  - User registration through facial recognition
+  - Real-time emotion analysis
+  - Statistical tracking over time per user
+  - Data export to CSV
+  - Streamlit-based interface
+  - Real-time processing with OpenCV and MediaPipe
 
 ## Requirements
 
@@ -29,15 +34,17 @@
 
 ## Installation
 
+  1. **Clone the repository:**
+
+  ```bash
+  git clone https://github.com/evilenx/Detect_emoc.git
+  cd Detect_emoc
   ```
-	git clone https://github.com/evilenx/Detect_emoc.git
-	cd Detect_emoc
-	```
 
   2. **Create virtual environment (recommended)**
   ```bash
-	python3 -m venv venv
-	source venv/bin/activate
+  python3 -m venv venv
+  source venv/bin/activate
   ```
 
   3. **Install dependences:**
