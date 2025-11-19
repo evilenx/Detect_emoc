@@ -49,7 +49,8 @@ def asegurar_carpetas():
 asegurar_carpetas()
 
 st.set_page_config(page_title="Detector Multimodal", layout="wide")
-st.title("Detector Multimodal de Emociones con Reconocimiento Facial")
+st.title("HumanFeel AI")
+
 
 # Sidebar: modo de trabajo
 modo = st.sidebar.radio(
@@ -63,7 +64,7 @@ modo = st.sidebar.radio(
 if modo == "Registrar usuario":
     st.subheader("🧾 Registro de nuevo usuario")
 
-    nombre = st.text_input("Nombre de la persona (ej: gabriella_hernandez):")
+    nombre = st.text_input("Nombre de la persona (ej: Gabriella Herrera):")
 
     st.write("Toma una foto clara del rostro (mirando a la cámara):")
     foto = st.camera_input("Captura una foto")
@@ -159,7 +160,8 @@ elif modo == "Reconocer & analizar emociones":
                 # Mostrar frame en Streamlit
                 frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 img = Image.fromarray(frame_rgb)
-                video_placeholder.image(img, use_column_width=True)
+                video_placeholder.image(img, width='stretch')
+                #video_placeholder.image(img, use_container_width=True)
 
             cap.release()
 
