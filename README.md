@@ -27,10 +27,10 @@
 
 ## Requirements
 
-	- Python: 3.8 or higher
-	- Webcam: For video capture
-	- Microphone: For audio emotion analysis
-	- OS: Linux, macOS, or Windows
+	> Python: 3.8 or higher
+	> Webcam: For video capture
+	> Microphone: For audio emotion analysis
+	> OS: Linux, macOS, or Windows
 
 ## Installation
 
